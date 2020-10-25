@@ -1,0 +1,14 @@
+/*
+ * Copyright (c) 2020. pinggonglve
+ */
+
+apply plugin: 'com.android.library'
+apply from: '../common.gradle'
+
+
+dependencies {
+
+    api project(":database")
+
+    implementation 'org.jsoup:jsoup:1.13.1'
+}

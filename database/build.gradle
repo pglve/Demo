@@ -1,0 +1,19 @@
+/*
+ * Copyright (c) 2020. pinggonglve
+ */
+
+apply plugin: 'com.android.library'
+apply from: '../common.gradle'
+
+dependencies {
+
+    api project(":base")
+
+    def room_version = "2.3.0-alpha03"
+    api "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    api "androidx.room:room-ktx:$room_version"
+    api "androidx.room:room-rxjava2:$room_version"
+    api "androidx.room:room-guava:$room_version"
+    testApi "androidx.room:room-testing:$room_version"
+}

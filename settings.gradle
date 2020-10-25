@@ -1,0 +1,7 @@
+include ':parse'
+include ':network'
+include ':database'
+include ':base'
+include ':app'
+rootProject.name = "Demo"
+include ':book'

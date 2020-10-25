@@ -1,0 +1,8 @@
+apply plugin: 'com.android.library'
+apply from:'../common.gradle'
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
+}

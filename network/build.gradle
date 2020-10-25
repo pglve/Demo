@@ -1,0 +1,17 @@
+/*
+ * Copyright (c) 2020. pinggonglve
+ */
+
+apply plugin: 'com.android.library'
+apply from:'../common.gradle'
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+
+    def retrofit_version = "2.9.0"
+    def okhttp_version = "4.8.1"
+    api "com.squareup.retrofit2:retrofit:$retrofit_version"
+    api "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    api "com.squareup.retrofit2:retrofit-mock:$retrofit_version"
+    api "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+}

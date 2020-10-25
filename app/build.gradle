@@ -1,0 +1,12 @@
+apply plugin: 'com.android.application'
+apply from: '../common.gradle'
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+
+    api project(":base")
+    api project(":database")
+    api project(":network")
+    api project(":parse")
+    api project(":book")
+}

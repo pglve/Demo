@@ -1,0 +1,43 @@
+/*
+ * Copyright (c) 2020. pinggonglve
+ */
+
+apply plugin: 'com.android.library'
+apply from:'../common.gradle'
+
+def compose_version = "1.0.0-alpha05"
+
+android {
+
+    buildFeatures {
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerVersion '1.4.10'
+        kotlinCompilerExtensionVersion "$compose_version"
+    }
+}
+
+dependencies {
+
+    api project(":base")
+    api project(":database")
+    api project(":parse")
+
+    api "androidx.compose.ui:ui:$compose_version"
+    api "androidx.ui:ui-tooling:$compose_version"
+    api "androidx.compose.foundation:foundation:$compose_version"
+    api "androidx.compose.material:material:$compose_version"
+    api "androidx.compose.material:material-icons-core:$compose_version"
+    api "androidx.compose.material:material-icons-extended:$compose_version"
+    api "androidx.compose.runtime:runtime-livedata:$compose_version"
+    api "androidx.compose.runtime:runtime-rxjava2:$compose_version"
+
+    androidTestApi "androidx.ui:ui-test:$compose_version"
+
+    api("io.coil-kt:coil:1.0.0")
+    api("io.coil-kt:coil-gif:1.0.0")
+    api("io.coil-kt:coil-svg:1.0.0")
+    api("io.coil-kt:coil-video:1.0.0")
+}
