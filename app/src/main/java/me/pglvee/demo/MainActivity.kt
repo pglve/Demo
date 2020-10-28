@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import me.pglvee.book.BookFindActivity
+import me.pglvee.media.VideoMediaActivity
 import me.pglvee.network.doSuccess
 
 class MainActivity : AppCompatActivity() {
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity() {
             it.doSuccess { Log.e("TAG", "success") }
         })
         viewModel.loadBookList()*/
-        startActivity(Intent(this, BookFindActivity::class.java))
+//        startActivity(Intent(this, BookFindActivity::class.java))
+        startActivity(Intent(this, VideoMediaActivity::class.java))
     }
 }

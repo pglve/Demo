@@ -15,8 +15,10 @@
             <option value="$PROJECT_DIR$/base" />
             <option value="$PROJECT_DIR$/book" />
             <option value="$PROJECT_DIR$/database" />
+            <option value="$PROJECT_DIR$/media" />
             <option value="$PROJECT_DIR$/network" />
             <option value="$PROJECT_DIR$/parse" />
+            <option value="$PROJECT_DIR$/test" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

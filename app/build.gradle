@@ -9,4 +9,5 @@ dependencies {
     api project(":network")
     api project(":parse")
     api project(":book")
+    api project(":media")
 }
