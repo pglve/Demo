@@ -10,6 +10,8 @@ import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.Style
 
+//download-access-key:MAPBOX_DOWNLOADS_TOKEN
+//download-access-token:sk.eyJ1IjoicGdsdmVlIiwiYSI6ImNrZ3V3YjU1NTAxbGcyc21ubDVncWhoMnQifQ.UIJ8gRCnQEgQKprG4dMDUQ
 class MapActivity : AppCompatActivity() {
 
     private var mapView: MapView? = null
