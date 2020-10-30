@@ -1,0 +1,7 @@
+<!--
+  ~ Copyright (c) 2020. pinggonglve
+  -->
+
+<resources>
+    <string name="mapbox_access_token">pk.eyJ1IjoicGdsdmVlIiwiYSI6ImNrZ3V2ZDZ2MTAyeXQyem4yOTdrNWdyN2oifQ.LwG8SyfRoGRjqiFfThZYiA</string>
+</resources>

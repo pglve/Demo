@@ -7,3 +7,4 @@ rootProject.name = "Demo"
 include ':book'
 include ':media'
 include ':test'
+include ':map'
