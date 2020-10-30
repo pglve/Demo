@@ -83,7 +83,7 @@ dependencies {
     api 'androidx.recyclerview:recyclerview:1.2.0-alpha06'
     api 'androidx.cardview:cardview:1.0.0'
     api 'androidx.viewpager2:viewpager2:1.1.0-alpha01'
-    api 'androidx.paging:paging-runtime-ktx:3.0.0-alpha07'
+    api 'androidx.paging:paging-runtime-ktx:3.0.0-alpha08'
 
     api "androidx.compose.ui:ui:$compose_version"
     api "androidx.ui:ui-tooling:$compose_version"
