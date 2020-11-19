@@ -28,6 +28,7 @@ import me.pglvee.base.screenWidth
 import me.pglvee.database.entity.Book
 
 class BookFindActivity : AppCompatActivity() {
+    @ExperimentalCoroutinesApi
     private val viewModel by viewModels<BookViewModel>()
 
     @ExperimentalCoroutinesApi
@@ -44,12 +45,9 @@ class BookFindActivity : AppCompatActivity() {
 
 const val rowSize = 3
 
-val itemWidth: Dp
-    get() = Dp(screenWidth / density).minus(40.dp).div(3)
-val imageWidth: Dp
-    get() = itemWidth.minus(10.dp)
-val imageHeight: Dp
-    get() = imageWidth.div(0.618f)
+val itemWidth: Dp by lazy { Dp(screenWidth / density).minus(40.dp).div(3) }
+val imageWidth: Dp by lazy { itemWidth.minus(10.dp) }
+val imageHeight: Dp by lazy { imageWidth.div(0.618f) }
 
 @ExperimentalCoroutinesApi
 @Composable
