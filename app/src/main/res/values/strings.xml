@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Demo</string>
+    <string name="write">write</string>
+    <string name="read">read</string>
 </resources>

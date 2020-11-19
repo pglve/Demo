@@ -1,19 +1,24 @@
 package me.pglvee.demo
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.view.View
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import me.pglvee.book.BookFindActivity
-import me.pglvee.media.VideoMediaActivity
-import me.pglvee.network.doSuccess
+import androidx.lifecycle.lifecycleScope
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.launch
+import me.pglvee.base.preferencesData
+import me.pglvee.base.read
+import me.pglvee.base.write
 
 class MainActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<MainViewModel>()
+
+    private val storeData by lazy { this.preferencesData }
+
+    private var counter: Int = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +29,19 @@ class MainActivity : AppCompatActivity() {
         })
         viewModel.loadBookList()*/
 //        startActivity(Intent(this, BookFindActivity::class.java))
-        startActivity(Intent(this, VideoMediaActivity::class.java))
+//        startActivity(Intent(this, VideoMediaActivity::class.java))
+
+        findViewById<View>(R.id.writeBtn).setOnClickListener {
+            lifecycleScope.launch {
+                storeData.write("name", counter ++)
+            }
+        }
+
+        findViewById<View>(R.id.readBtn).setOnClickListener {
+            lifecycleScope.launch {
+                val counter = storeData.read<Int>("name")
+                findViewById<TextView>(R.id.result).text = counter.toString()
+            }
+        }
     }
 }
