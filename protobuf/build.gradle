@@ -1,0 +1,28 @@
+/*
+ * Copyright (c) 2020. pinggonglve
+ */
+
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'com.squareup.wire'
+}
+apply from: '../common.gradle'
+
+android {
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+    wire {
+        kotlin {
+            out "${projectDir}/src/main/kotlin"
+        }
+        sourcePath {
+            srcDir 'src/main/proto'
+        }
+    }
+}
+
+dependencies {
+    api "com.squareup.wire:wire-runtime:3.5.0"
+}

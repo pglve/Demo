@@ -19,6 +19,7 @@
             <option value="$PROJECT_DIR$/media" />
             <option value="$PROJECT_DIR$/network" />
             <option value="$PROJECT_DIR$/parse" />
+            <option value="$PROJECT_DIR$/protobuf" />
             <option value="$PROJECT_DIR$/test" />
           </set>
         </option>

@@ -1,0 +1,20 @@
+syntax = "proto3";
+option java_package = "me.pglvee.generation.protobuf";
+
+message LogPreferences {
+  enum Type {
+    UNKNOWN = 0;
+    PC      = 1;
+    MOBILE  = 2;
+    WEB     = 3;
+  }
+  message UserInfo {
+    bytes name = 1;
+    string avatar = 2;
+    uint32 age = 3;
+  }
+  uint64 id = 1;
+  Type type = 2;
+  string token = 3;
+  UserInfo user_info = 4;
+}
