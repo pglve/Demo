@@ -1,8 +1,10 @@
 package me.pglvee.demo
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -37,11 +39,18 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        val register = registerForActivityResult(ActivityResultContracts.OpenDocument()) {
+            Log.e("uri", "uri : $it")
+        }
         findViewById<View>(R.id.readBtn).setOnClickListener {
-            lifecycleScope.launch {
+            /*lifecycleScope.launch {
                 val counter = storeData.read<Int>("name")
                 findViewById<TextView>(R.id.result).text = counter.toString()
-            }
+            }*/
+
+
+            register.launch(arrayOf("image/*"))
         }
+
     }
 }
