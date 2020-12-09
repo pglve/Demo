@@ -10,6 +10,7 @@ import android.provider.DocumentsContract
 import android.provider.OpenableColumns
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -20,6 +21,8 @@ import kotlinx.coroutines.launch
 import me.pglvee.base.preferencesData
 import me.pglvee.base.read
 import me.pglvee.base.write
+import me.pglvee.compress.CompressUtil
+import me.pglvee.compress.CompressUtil.compress
 import java.io.*
 
 class MainActivity : AppCompatActivity() {
@@ -43,19 +46,31 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<View>(R.id.writeBtn).setOnClickListener {
             lifecycleScope.launch {
-                storeData.write("name", counter ++)
+                storeData.write("name", counter++)
             }
         }
 
         val register = registerForActivityResult(ActivityResultContracts.OpenDocument()) {
-            Log.e("uri", "uri : $it")
+            Log.e("compress", "uri : $it")
+            dumpImageMetaData(it)
+            val bitmap = getBitmapFromUri(it)
+            Log.e("compress", "compress before")
+            val file = File.createTempFile("temp_s", ".jpg", cacheDir)
+            CompressUtil.newInstance(this)
+                .src(bitmap)
+                .dst(file)
+                .dimension(480, 480)
+                .maxSize(20 * 1024)
+                .compress()
+            Log.e("compress", "compress after size : ${file.length()}")
+            findViewById<ImageView>(R.id.testIv).setImageURI(Uri.fromFile(file))
+
         }
         findViewById<View>(R.id.readBtn).setOnClickListener {
             /*lifecycleScope.launch {
                 val counter = storeData.read<Int>("name")
                 findViewById<TextView>(R.id.result).text = counter.toString()
             }*/
-            val bitmap =
 
             register.launch(arrayOf("image/*"))
         }
@@ -68,7 +83,8 @@ class MainActivity : AppCompatActivity() {
         // one row. There's no need to filter, sort, or select fields,
         // because we want all fields for one document.
         val cursor: Cursor? = contentResolver.query(
-            uri, null, null, null, null, null)
+            uri, null, null, null, null, null
+        )
 
         cursor?.use {
             // moveToFirst() returns false if the cursor has 0 rows. Very handy for

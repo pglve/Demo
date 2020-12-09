@@ -10,4 +10,5 @@ dependencies {
     api project(":parse")
     api project(":book")
     api project(":media")
+    api project(":compress")
 }
