@@ -2,7 +2,7 @@
  * Copyright (c) 2020. pinggonglve
  */
 
-package me.pglvee.compress
+package me.pglvee.websocket
 
 import org.junit.Test
 

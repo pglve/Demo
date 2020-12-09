@@ -2,7 +2,7 @@
  * Copyright (c) 2020. pinggonglve
  */
 
-package me.pglvee.compress
+package me.pglvee.websocket
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -23,6 +23,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("me.pglvee.compress.test", appContext.packageName)
+        assertEquals("me.pglvee.websocket.test", appContext.packageName)
     }
 }

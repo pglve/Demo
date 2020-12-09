@@ -4,10 +4,9 @@
 
 
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
-def compose_version = "1.0.0-alpha05"
+def compose_version = "1.0.0-alpha07"
 
 android {
     compileSdkVersion 30
@@ -45,11 +44,12 @@ android {
     }
 
     buildFeatures {
+        viewBinding true
         compose true
     }
 
     composeOptions {
-        kotlinCompilerVersion '1.4.10'
+        kotlinCompilerVersion "$kotlin_version"
         kotlinCompilerExtensionVersion "$compose_version"
     }
 }
@@ -73,13 +73,13 @@ dependencies {
     api "androidx.datastore:datastore-preferences:$datastore_version"
     api "androidx.datastore:datastore-preferences-core:$datastore_version"
 
-    def lifecycle_version = "2.3.0-alpha03"
+    def lifecycle_version = "2.3.0-beta01"
     api "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     api "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     api "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
     api "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
 
-    def work_version = "2.5.0-alpha03"
+    def work_version = "2.5.0-beta01"
     api "androidx.work:work-runtime:$work_version"
     api "androidx.work:work-runtime-ktx:$work_version"
     api "androidx.work:work-rxjava2:$work_version"
@@ -90,6 +90,7 @@ dependencies {
     api 'androidx.cardview:cardview:1.0.0'
     api 'androidx.viewpager2:viewpager2:1.1.0-alpha01'
     api 'androidx.paging:paging-runtime-ktx:3.0.0-alpha09'
+    api "androidx.paging:paging-compose:1.0.0-alpha02"
 
     api "androidx.compose.ui:ui:$compose_version"
     api "androidx.ui:ui-tooling:$compose_version"
@@ -100,4 +101,11 @@ dependencies {
     api "androidx.compose.runtime:runtime-livedata:$compose_version"
     api "androidx.compose.runtime:runtime-rxjava2:$compose_version"
     androidTestApi "androidx.ui:ui-test:$compose_version"
+
+    def retrofit_version = "2.9.0"
+    def okhttp_version = "4.9.0"
+    api "com.squareup.retrofit2:retrofit:$retrofit_version"
+    api "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    api "com.squareup.retrofit2:retrofit-mock:$retrofit_version"
+    api "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
 }
