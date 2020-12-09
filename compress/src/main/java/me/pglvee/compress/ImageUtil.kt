@@ -7,8 +7,7 @@ package me.pglvee.compress
 import android.content.Context
 import android.text.TextUtils
 import androidx.exifinterface.media.ExifInterface
-import java.io.File
-import java.io.IOException
+import java.io.*
 
 object ImageUtil {
 
@@ -70,4 +69,28 @@ object ImageUtil {
         }
         return degree
     }
+
+    fun File.toByteArray(): ByteArray {
+        FileInputStream(this).use { fis ->
+            ByteArrayOutputStream().use { bos ->
+                val b = ByteArray(8 * 1024)
+                var n: Int
+                while (fis.read(b).also { n = it } != -1) {
+                    bos.write(b, 0, n)
+                }
+                return bos.toByteArray()
+            }
+        }
+    }
+
+    fun ByteArray.toPath(context: Context): String {
+        val file = getTempFile(context)
+        FileOutputStream(file).use { fos ->
+            BufferedOutputStream(fos).use { bos ->
+                bos.write(this)
+            }
+        }
+        return file
+    }
+
 }

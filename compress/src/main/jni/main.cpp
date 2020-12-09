@@ -421,6 +421,7 @@ int thumbnailCompress(const char *input, const char *output, unsigned long maxSi
         unsigned long scale = jpegSize_out / maxSize;
         if (scale > 5) scale = 5;
         quality -= (10 * (int) scale);
+        if (quality <= 10) quality = 10;
         printf(", %s subsampling, quality = %d\n", subsampName[inSubsamp], quality);
 
         if ((tjInstance = tjInitCompress()) == nullptr) {
@@ -432,8 +433,9 @@ int thumbnailCompress(const char *input, const char *output, unsigned long maxSi
                         quality, 0) < 0) {
             THROW_TJ("compressing image", thumbout);
         }
+        printf(", out size = %ld\n", jpegSize_out);
 
-    } while (jpegSize_out > maxSize && maxSize > 0);
+    } while (jpegSize_out > maxSize && maxSize > 0 && quality > 10);
 
     /* Input image has been transformed, and no re-compression options
               have been selected.  Write the transformed image to disk and exit. */

@@ -6,24 +6,32 @@ package me.pglvee.compress
 
 import android.content.Context
 import android.graphics.Bitmap
-import java.io.BufferedOutputStream
+import me.pglvee.compress.ImageUtil.toPath
 import java.io.File
-import java.io.FileOutputStream
 
-data class ImageData(
-    var context: Context,
-    var inputFilePath: String? = null,
-    var outputFilePath: String? = null,
-    var bitmap: Bitmap? = null,
+class ImageData(val context: Context, val minSize: Long) {
 
-    var width: Int = 0,
-    var height: Int = 0,
-    var quality: Int = 100,
-    var maxSize: Long = 0,
-    var angle: Int = 0,
-    var maxScale: Float = 0f,
+    var inputFilePath: String? = null
+        private set
+    var outputFilePath: String? = null
+        private set
+    var inputBitmap: Bitmap? = null
+        private set
+
+    var width: Int = 0
+        private set
+    var height: Int = 0
+        private set
+    var quality: Int = 100
+        private set
+    var maxSize: Long = 0
+        private set
+    var angle: Int = 0
+        private set
+    var maxScale: Float = 0f
+        private set
     var background: Int = 0
-) {
+        private set
 
     fun src(file: File): ImageData {
         inputFilePath = file.absolutePath
@@ -35,20 +43,13 @@ data class ImageData(
         return this
     }
 
-    fun src(b: Bitmap): ImageData {
-        bitmap = b
+    fun src(bitmap: Bitmap): ImageData {
+        inputBitmap = bitmap
         return this
     }
 
     fun src(data: ByteArray): ImageData {
-        val file =
-            File.createTempFile(System.currentTimeMillis().toString(), ".jpg", context.cacheDir)
-        FileOutputStream(file).use { fos ->
-            BufferedOutputStream(fos).use { bos ->
-                bos.write(data)
-            }
-        }
-        inputFilePath = file.path
+        inputFilePath = data.toPath(context)
         return this
     }
 
@@ -61,22 +62,15 @@ data class ImageData(
         outputFilePath = path
         return this
     }
-//
-//    fun dst(var data: ByteArray): ImageData {
-//        FileInputStream(outputFilePath).use { fis ->
-//            ByteArrayOutputStream().use { bos ->
-//                val b = ByteArray(8 * 1024)
-//                var n: Int
-//                while (fis.read(b).also { n = it } != -1) {
-//                    bos.write(b, 0, n)
-//                }
-//                fis.close()
-//                bos.close()
-//                data = bos.toByteArray()
-//            }
-//        }
-//    }
 
+    /**
+     * 设置图片的最大尺寸，超出尺寸则缩放该图片
+     */
+    fun dimension(width: Int, height: Int): ImageData {
+        this.width = width
+        this.height = height
+        return this
+    }
 
     /**
      * 设置图片最大比例，超出比例裁剪图片
@@ -113,7 +107,7 @@ data class ImageData(
     /**
      * 限制输出图片的最大大小，使用[.image]方法时无效
      */
-    fun max(maxSize: Long): ImageData {
+    fun maxSize(maxSize: Long): ImageData {
         this.maxSize = maxSize
         return this
     }
