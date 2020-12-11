@@ -9,8 +9,6 @@ plugins {
     id 'maven-publish'
 }
 
-def lib_version = '1.0.0'
-
 android {
     compileSdkVersion 30
 
@@ -18,7 +16,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -60,6 +58,11 @@ dependencies {
     implementation 'androidx.exifinterface:exifinterface:1.3.2'
 }
 
+task androidSourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
 bintray {
     user = 'pglvee'
     key = '2426e3246a8905a4816c3b12bef00772195c6548'
@@ -70,12 +73,12 @@ bintray {
         name = 'compress'
         userOrg = 'pglvee'
         licenses = ['Apache-2.0']
-        vcsUrl = 'https://github.com/bintray/gradle-bintray-plugin.git'
+        vcsUrl = 'https://github.com/pglve/Demo.git'
         version {
-            name = "$lib_version"
-            desc = "Gradle Bintray Plugin $lib_version"
+            name = "${android.defaultConfig.versionName}"
+            desc = "Gradle Bintray Plugin ${android.defaultConfig.versionName}"
             released  = new Date()
-            vcsTag = "$lib_version"
+            vcsTag = "${android.defaultConfig.versionName}"
         }
     }
 }
@@ -84,9 +87,10 @@ publishing {
     publications {
         MyPublication(MavenPublication) {
             artifact("$buildDir/outputs/aar/compress-release.aar")
+            artifact androidSourcesJar
             groupId 'me.pglvee.ultra'
             artifactId 'compress'
-            version "$lib_version"
+            version "${android.defaultConfig.versionName}"
             // Define this explicitly if using implementation or api configurations
             pom.withXml {
                 def dependenciesNode = asNode().appendNode('dependencies')
