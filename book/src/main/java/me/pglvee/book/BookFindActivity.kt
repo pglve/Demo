@@ -8,17 +8,13 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumnForIndexed
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.onActive
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -34,11 +30,11 @@ class BookFindActivity : AppCompatActivity() {
     @ExperimentalCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
+        /*setContent {
             BookShelfPage(viewModel) {
                 Log.e("书名", it.bookName ?: "")
             }
-        }
+        }*/
         viewModel.find()
     }
 }
@@ -55,7 +51,7 @@ fun BookShelfPage(viewModel: BookViewModel, onItemClick: (Book) -> Unit) {
     val state = viewModel.bookList.collectAsState()
     val itemsWind = state.value.books.windowed(rowSize, rowSize, true)
     val lastIndex = itemsWind.lastIndex
-    LazyColumnForIndexed(itemsWind) { index, items ->
+    /*LazyColumnForIndexed(itemsWind) { index, items ->
         if (lastIndex == index) {
             onActive(callback = {
                 viewModel.find()
@@ -68,12 +64,12 @@ fun BookShelfPage(viewModel: BookViewModel, onItemClick: (Book) -> Unit) {
                 Spacer(modifier = Modifier.preferredSize(10.dp))
             }
         }
-    }
+    }*/
 }
 
 @Composable
 fun BookShelf(book: Book, onItemClick: (Book) -> Unit) {
-    Column(
+    /*Column(
         modifier = Modifier.preferredWidth(itemWidth)
             .clickable(onClick = { onItemClick(book) })
     ) {
@@ -87,5 +83,5 @@ fun BookShelf(book: Book, onItemClick: (Book) -> Unit) {
             modifier = Modifier.preferredWidth(imageWidth)
         )
         Spacer(modifier = Modifier.preferredSize(5.dp))
-    }
+    }*/
 }

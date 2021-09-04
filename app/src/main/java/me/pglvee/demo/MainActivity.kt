@@ -1,5 +1,6 @@
 package me.pglvee.demo
 
+import android.content.Intent
 import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -11,24 +12,20 @@ import android.provider.OpenableColumns
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
-import me.pglvee.base.preferencesData
-import me.pglvee.base.read
 import me.pglvee.base.write
 import me.pglvee.compress.CompressUtil
 import me.pglvee.compress.CompressUtil.compress
+import me.pglvee.test.TestActivity
 import java.io.*
 
 class MainActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<MainViewModel>()
-
-    private val storeData by lazy { this.preferencesData }
 
     private var counter: Int = 100
 
@@ -44,9 +41,9 @@ class MainActivity : AppCompatActivity() {
 //        startActivity(Intent(this, VideoMediaActivity::class.java))
 
         findViewById<View>(R.id.writeBtn).setOnClickListener {
-            lifecycleScope.launch {
-                storeData.write("name", counter++)
-            }
+//            lifecycleScope.launch {
+//                storeData.write("name", counter++)
+//            }
         }
 
         val register = registerForActivityResult(ActivityResultContracts.OpenDocument()) {
@@ -71,10 +68,18 @@ class MainActivity : AppCompatActivity() {
                 findViewById<TextView>(R.id.result).text = counter.toString()
             }*/
 
-            register.launch(arrayOf("image/*"))
+//            register.launch(arrayOf("image/*"))
+            /*val fragment = TestMotionLayoutFragment()
+            supportFragmentManager
+                .beginTransaction()
+                .add(R.id.fragmentFl, fragment,"motion_layout")
+                .commit()*/
+
+            startActivity(Intent(this, TestActivity::class.java))
         }
 
     }
+
 
     fun dumpImageMetaData(uri: Uri) {
 

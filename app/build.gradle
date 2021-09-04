@@ -11,4 +11,5 @@ dependencies {
     api project(":book")
     api project(":media")
     api project(":compress")
+    api project(":test")
 }

@@ -4,7 +4,6 @@
 
 apply plugin: 'com.android.library'
 apply from: '../common.gradle'
-apply plugin: 'kotlin-android'
 
 dependencies {
 
@@ -15,7 +14,7 @@ dependencies {
     implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-markerview-v9:0.4.0'
 
     // Mapbox Maps SDK dependency
-    implementation ('com.mapbox.mapboxsdk:mapbox-android-sdk:9.5.0'){
+    implementation ('com.mapbox.mapboxsdk:mapbox-android-sdk:9.6.1'){
         exclude group: 'group_name', module: 'module_name'
     }
 

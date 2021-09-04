@@ -5,7 +5,6 @@
 apply plugin: 'com.android.library'
 apply from: '../common.gradle'
 
-
 dependencies {
 
     api project(":database")
